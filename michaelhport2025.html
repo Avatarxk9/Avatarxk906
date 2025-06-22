@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Harris - Digital Media Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* # General Styling */
+        :root {
+            --primary-color: #333;
+            --secondary-color: #555;
+            --accent-color: #00bcd4; /* Cyan from IMG_7584.png */
+            --light-gray: #f4f4f4;
+            --white: #fff;
+            --text-color: #333;
+            --header-font: 'Playfair Display', serif;
+            --body-font: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        /* # Header and Navigation */
+        header {
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--header-font);
+            font-size: 1.8em;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--accent-color);
+            transition: width 0.4s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--accent-color);
+        }
+
+        /* # Hero Section */
+        #hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000; /* Black for negative space */
+            color: var(--white);
+            text-align: center;
+            overflow: hidden;
+            padding-top: 80px; /* Offset for fixed header */
+        }
+
+        #hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1; /* Fully visible in negative space */
+            z-index: 1;
+            mix-blend-mode: screen; /* Blends nicely with black background */
+        }
+
+        #hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 2s ease-out;
+        }
+
+        #hero h1 {
+            font-family: var(--header-font);
+            font-size: 4em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #hero p {
+            font-size: 1.5em;
+            font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        /* # About Section */
+        #about {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        #about .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #about h2 {
+            font-family: var(--header-font);
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        #about p {
+            font-size: 1.1em;
+            max-width: 800px;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+
+        /* # Projects Section */
+        #projects {
+            background-color: var(--white);
+            padding: 80px 0;
+            min-height: 100vh;
+        }
+
+        #projects h2 {
+            font-family: var(--header-font);
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+
+        .project-item {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+            align-items: center;
+        }
+
+        .project-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .project-text {
+            flex: 1;
+            padding: 20px;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .project-item:nth-child(even) .project-text {
+            animation: slideInRight 1s ease-out;
+        }
+
+        .project-text h3 {
+            font-family: var(--header-font);
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .project-text p {
+            font-size: 1em;
+            line-height: 1.7;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .project-images {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            position: relative; /* For image positioning */
+        }
+
+        .project-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; /* Indicate images are clickable */
+        }
+
+        .project-images img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* # Specific Project Styles */
+        /* Project 1: Vector Illustrations (Magazine Style) */
+        #project1 .project-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns for a magazine layout */
+            gap: 15px;
+            background-color: #000; /* Black negative space */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #project1 .project-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: screen; /* For the cyan effect */
+        }
+
+        #project1 .project-images img:nth-child(1) {
+            grid-column: 1 / 3; /* Image 2 spans two columns */
+        }
+        #project1 .project-images img:nth-child(2) {
+            grid-column: 1 / 2;
+        }
+        #project1 .project-images img:nth-child(3) {
+            grid-column: 2 / 3;
+        }
+
+        /* Project 2: Product Graphic Designs */
+        #project2 .project-images {
+            display: flex;
+            flex-direction: column; /* Stack vertically */
+            gap: 25px; /* Increased space between product display and panorama */
+            align-items: center; /* Center the images */
+        }
+
+        #project2 .product-display {
+            display: flex;
+            flex-direction: column; /* Stack skateboard and griptape */
+            align-items: center;
+            gap: 0px; /* No gap for a congruent look */
+            width: 100%; /* Ensure it takes full available width */
+            max-width: 400px; /* Limit max width for aesthetic */
+            border-radius: 8px; /* Apply border-radius to the container for congruence */
+            overflow: hidden; /* Hide overflow if images slightly exceed container */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Add shadow to the combined unit */
+        }
+
+        #project2 .product-display img {
+            width: 100%; /* Make images fill the product-display container */
+            height: auto;
+            object-fit: contain;
+            box-shadow: none; /* No individual shadow here */
+            border-radius: 0; /* No individual border-radius here */
+        }
+
+        /* # Project 2 Carousel Specific Styles */
+        .concept-panorama {
+            width: 100%;
+            max-width: 500px; /* Limit max width for aesthetic */
+            position: relative; /* For absolute positioning of dots */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            background-color: #f0f0f0;
+            overflow: hidden; /* Ensure images don't overflow during transitions */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px; /* Ensure space even if no image is active */
+        }
+
+        .panorama-slide {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: none; /* Hidden by default */
+            transition: opacity 0.5s ease-in-out; /* Smooth fade effect */
+            opacity: 0; /* Start invisible for fade-in */
+        }
+
+        .panorama-slide.active {
+            display: block; /* Display the active slide */
+            opacity: 1; /* Fade in */
+        }
+
+        .panorama-dots {
+            text-align: center;
+            margin-top: 15px;
+            position: absolute; /* Position dots over the carousel */
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5; /* Ensure dots are clickable */
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: var(--accent-color);
+        }
+
+
+        /* Project 3: Cartoonist Submission */
+        #project3 .project-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #project3 .project-images img {
+            max-width: 80%; /* Adjust size for display */
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* # Contact Section */
+        #contact {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+            min-height: 50vh;
+        }
+
+        #contact h2 {
+            font-family: var(--header-font);
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+
+        #contact p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        #contact a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        #contact a:hover {
+            color: var(--white);
+        }
+
+        /* # Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--light-gray);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+        }
+
+        /* # Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 0 15px;
+            }
+
+            #hero h1 {
+                font-size: 3em;
+            }
+
+            #hero p {
+                font-size: 1.2em;
+            }
+
+            .project-item {
+                flex-direction: column;
+            }
+
+            .project-item:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .project-text {
+                padding: 10px;
+                text-align: center;
+            }
+
+            .project-images {
+                width: 100%;
+                padding: 10px;
+            }
+
+            #project1 .project-images {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+            #project1 .project-images img:nth-child(1) {
+                grid-column: auto;
+            }
+            #project1 .project-images img:nth-child(2) {
+                grid-column: auto;
+            }
+            #project1 .project-images img:nth-child(3) {
+                grid-column: auto;
+            }
+
+            #project2 .product-display,
+            #project2 .concept-panorama {
+                max-width: 90%; /* Adjust for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul li {
+                margin: 0 10px;
+                font-size: 0.9em;
+            }
+
+            #hero h1 {
+                font-size: 2.5em;
+            }
+
+            #hero p {
+                font-size: 1em;
+            }
+
+            #about h2, #projects h2, #contact h2 {
+                font-size: 2.5em;
+            }
+
+            .project-text h3 {
+                font-size: 1.8em;
+            }
+        }
+
+        /* # Simple CSS Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Intersection Observer for scroll animations */
+        .animated-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* # Lightbox Styles */
+        .lightbox-overlay {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            display: flex; /* Use flex for centering */
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Indicate it's clickable to close */
+            animation: fadeInOverlay 0.3s ease;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            animation: zoomInContent 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: default; /* Reset cursor for content */
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh; /* Adjust as needed */
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 4px;
+        }
+
+        .lightbox-caption {
+            color: var(--text-color);
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #fff; /* White close button */
+            font-size: 35px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-lightbox:hover,
+        .close-lightbox:focus {
+            color: var(--accent-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomInContent {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#hero" class="logo">Michael Harris</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <img id="hero-bg" src="IMG_7584.png" alt="Abstract Cyan Dots Background">
+        <div id="hero-content">
+            <h1>Michael Harris</h1>
+            <p>Digital Media Student | Graphic Designer</p>
+        </div>
+    </section>
+
+    <section id="about" class="animated-section">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>Motivated Digital Media student with hands-on experience in graphic design and a strong background in teamwork and time management. Seeking opportunities to grow creatively and professionally in the digital and media arts space.</p>
+        </div>
+    </section>
+
+    <section id="projects" class="animated-section">
+        <div class="container">
+            <h2>My Work</h2>
+
+            <div class="project-item" id="project1">
+                <div class="project-text">
+                    <h3>Vector Illustrations</h3>
+                    <p>A selection of vector illustrations showcasing proficiency with graphic design software such as Adobe Suite and other general Vector Illustration software like Procreate. These pieces highlight my ability to create intricate and visually appealing digital art.</p>
+                </div>
+                <div class="project-images">
+                    <img src="IMG_7599.jpg" alt="Vector Illustration 1" data-caption="Abstract Vector Illustration">
+                    <img src="IMG_7600.jpg" alt="Vector Illustration 2" data-caption="Geometric Pattern Vector">
+                    <img src="IMG_7601.jpg" alt="Vector Illustration 3" data-caption="Character Design Vector">
+                </div>
+            </div>
+
+            <div class="project-item" id="project2">
+                <div class="project-text">
+                    <h3>Product Graphic Designs</h3>
+                    <p>This project features a selection of product graphic designs, including a custom skateboard deck and grip tape design, along with concept illustrations. It demonstrates my skills in applying design principles to physical products and conceptualizing visual ideas.</p>
+                </div>
+                <div class="project-images">
+                    <div class="product-display">
+                        <img src="IMG_7602.jpg" alt="Skateboard Deck Design" data-caption="Custom Skateboard Deck Design">
+                        <img src="IMG_7603.jpg" alt="Grip Tape Design" data-caption="Matching Grip Tape Design">
+                    </div>
+                    <div class="concept-panorama">
+                        <img class="panorama-slide" src="IMG_7614.jpg" alt="Concept Illustration 1" data-caption="Urban Concept Art 1">
+                        <img class="panorama-slide" src="IMG_7616.jpg" alt="Concept Illustration 2" data-caption="Urban Concept Art 2">
+                        <img class="panorama-slide" src="IMG_7617.jpg" alt="Concept Illustration 3" data-caption="Urban Concept Art 3">
+                        <div class="panorama-dots">
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-item" id="project3">
+                <div class="project-text">
+                    <h3>Cartoonist Submission</h3>
+                    <p>A brief selection from a cartoonist submission for a university newspaper. This piece highlights my ability to create engaging and contextual illustrations for publications.</p>
+                    <p><strong>Context:</strong> Sunday Recap is attached below. This week is highlighting football season. The Jackson State University Tigers took on the Texas Southern University Tigers and achieved an impressive 43-13 points victory. This also marks the first road victory for the program. Go Tigers!</p>
+                </div>
+                <div class="project-images">
+                    <img src="IMG_7610.jpg" alt="Cartoonist Submission - Football Recap" data-caption="Sunday Recap University Newspaper Cartoon">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="animated-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            <p><a href="mailto:"michael.harri765@gmail.com">michael.harri765@gmail.com</a></p>
+            </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Michael Harris. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="lightboxOverlay" class="lightbox-overlay">
+        <span class="close-lightbox">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="Enlarged Project Image">
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // # General Scroll Animation
+        const animateOnScroll = () => {
+            const sections = document.querySelectorAll('.animated-section');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        };
+
+        // # Lightbox Functionality
+        const setupLightbox = () => {
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const closeLightbox = document.querySelector('.close-lightbox');
+            const projectImages = document.querySelectorAll('.project-images img');
+
+            projectImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    const imgSrc = this.src;
+                    const imgAlt = this.alt;
+                    const imgCaption = this.dataset.caption || imgAlt; // Use data-caption if available, otherwise alt
+
+                    lightboxImage.src = imgSrc;
+                    lightboxImage.alt = imgAlt;
+                    lightboxCaption.textContent = imgCaption;
+                    lightboxOverlay.style.display = 'flex'; // Show the lightbox
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling body when lightbox is open
+                });
+            });
+
+            closeLightbox.addEventListener('click', () => {
+                lightboxOverlay.style.display = 'none'; // Hide the lightbox
+                document.body.style.overflow = ''; // Restore body scrolling
+            });
+
+            // Close lightbox when clicking outside the content
+            lightboxOverlay.addEventListener('click', (e) => {
+                if (e.target === lightboxOverlay) {
+                    lightboxOverlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+        };
+
+        // # Project 2 Panorama Carousel Functionality
+        const setupPanoramaCarousel = () => {
+            const panoramaContainer = document.querySelector('.concept-panorama');
+            if (!panoramaContainer) return; // Exit if container not found
+
+            const slides = panoramaContainer.querySelectorAll('.panorama-slide');
+            const dotsContainer = panoramaContainer.querySelector('.panorama-dots');
+
+            let currentSlideIndex = 0;
+            let slideInterval;
+
+            // Generate dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => showSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.dot');
+
+            const showSlide = (index) => {
+                // Hide all slides and deactivate all dots
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                    slide.style.opacity = 0; // Ensure fade out
+                });
+                dots.forEach(dot => dot.classList.remove('active'));
+
+                // Show the current slide and activate its dot
+                slides[index].classList.add('active');
+                slides[index].style.opacity = 1; // Fade in
+                dots[index].classList.add('active');
+
+                currentSlideIndex = index;
+            };
+
+            const nextSlide = () => {
+                currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                showSlide(currentSlideIndex);
+            };
+
+            const startCarousel = () => {
+                slideInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+            };
+
+            const stopCarousel = () => {
+                clearInterval(slideInterval);
+            };
+
+            // Initial display
+            showSlide(currentSlideIndex);
+            startCarousel(); // Start auto-play
+
+            // Optional: Pause on hover
+            panoramaContainer.addEventListener('mouseenter', stopCarousel);
+            panoramaContainer.addEventListener('mouseleave', startCarousel);
+        };
+
+
+        // # Initialize all functionalities when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            animateOnScroll();
+            setupLightbox();
+            setupPanoramaCarousel();
+        });
+    </script>
+</body>
+</html>
